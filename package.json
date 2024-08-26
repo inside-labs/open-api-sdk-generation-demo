@@ -1,0 +1,9 @@
+{
+  "name": "open-api-sdk-generation-demo",
+  "packageManager": "yarn@4.4.1",
+  "devDependencies": {
+    "openapi-zod-client": "^1.18.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
