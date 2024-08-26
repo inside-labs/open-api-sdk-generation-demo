@@ -831,6 +831,7 @@ __metadata:
     openapi-zod-client: "npm:^1.18.2"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.5.4"
+    zodios: "npm:^5.1.0"
   languageName: unknown
   linkType: soft
 
@@ -1166,5 +1167,15 @@ __metadata:
   version: 3.23.8
   resolution: "zod@npm:3.23.8"
   checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
+  languageName: node
+  linkType: hard
+
+"zodios@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "zodios@npm:5.1.0"
+  peerDependencies:
+    axios: ^0.x
+    zod: ^3.x
+  checksum: 10c0/239eabae9253aa6fd6c901f0b3a80896bff503dcbdadcc9f9dfb356cdf3ad3269bfdaca889217719d0763359e3a8dd1df2286ae4763cf18a7cfce930b3a201eb
   languageName: node
   linkType: hard
