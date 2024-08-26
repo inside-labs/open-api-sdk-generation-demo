@@ -3,14 +3,30 @@ set -e
 set -eo pipefail
 
 BASE_DIR="$(dirname "$0")"
-OPEN_API_SCHEMA_URL="https://surselva.cariboo.dev/api/api-docs/api-docs.json"
-SCHEMA_FILE="$(mktemp)"
 
-SDK_NAME="cariboo"
+# Get SDK_NAME from cli params:
+SDK_NAME="$1"
+if [ -z "$SDK_NAME" ]; then
+    echo "Please provide a valid SDK name as first parameter. Example: generate-sdk.sh cariboo"
+    exit 1
+fi
+if [ ! -d "${BASE_DIR}/${SDK_NAME}" ]; then
+    echo "No directory for SDK \"${SDK_NAME}\" found."
+    exit 2
+fi
+
+SCHEMA_FILE="$(mktemp)"
 SDK_FILE="${BASE_DIR}/../../src/lib/sdk/${SDK_NAME}/client.ts"
 HANDLEBAR_TEMPLATE_FILE="${BASE_DIR}/${SDK_NAME}/template.hbs"
 
-# Make these available to shell scripts down the road:
+# Load SDK-specific config:
+. "${BASE_DIR}/${SDK_NAME}/config.sh"
+if [ -z "${OPEN_API_SCHEMA_URL}" ]; then
+    echo "Config for ${SDK_NAME} did not export OPEN_API_SCHEMA_URL as expected."
+    exit 3
+fi
+
+# Make variables available to shell scripts down the road:
 export SDK_FILE
 export SCHEMA_FILE
 export SDK_NAME
@@ -26,7 +42,7 @@ curl "${OPEN_API_SCHEMA_URL}" -o "${SCHEMA_FILE}"
 if [ -f "${BASE_DIR}/${SDK_NAME}/pre-process-schema.sh" ]; then
     echo ""
     echo "================================"
-    echo "🦑 Preprocess OpenAPI Schema"
+    echo "🦑 Preprocess OpenAPI Schema for ${SDK_NAME}"
     "${BASE_DIR}/${SDK_NAME}/pre-process-schema.sh"
 fi
 
@@ -46,7 +62,7 @@ echo "🦑 Generate SDK for ${SDK_NAME} from ${SCHEMA_FILE}"
 if [ -f "${BASE_DIR}/${SDK_NAME}/post-process-schema.sh" ]; then
     echo ""
     echo "================================"
-    echo "🦑 Postprocess OpenAPI Schema"
+    echo "🦑 Postprocess OpenAPI Schema for ${SDK_NAME}"
     "${BASE_DIR}/${SDK_NAME}/post-process-schema.sh"
 fi
 

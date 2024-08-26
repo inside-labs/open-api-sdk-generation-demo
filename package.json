@@ -3,7 +3,7 @@
   "packageManager": "yarn@4.4.1",
   "type": "module",
   "scripts": {
-    "generate": "./scripts/generate-sdk/generate-sdk.sh",
+    "generate": "./scripts/generate-sdk/generate-sdk.sh cariboo",
     "start": "ts-node-esm ./src/index.ts"
   },
   "devDependencies": {

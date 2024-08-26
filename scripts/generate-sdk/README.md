@@ -1,5 +1,13 @@
 # Generate Zod-based SDK From An Open API Schema
 
+## Usage
+
+1. Create an SDK-specific directory. Check out `cariboo` for an example.
+2. Run the generator:
+   ```
+   ./generate-sdk.sh cariboo
+   ```
+
 ## cariboo
 
 > 🚨 **Please, remember: generate schema only when it's absolutely necessary - SPOT's types are very unstable and we often have to patch them up manually.**
