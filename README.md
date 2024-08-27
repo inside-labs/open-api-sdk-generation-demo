@@ -5,6 +5,7 @@
 ## Usage
 
 ```shell
+yarn # Install dependencies
 yarn generate cariboo # Generate SDK
 yarn start # Run Demo
 ```
